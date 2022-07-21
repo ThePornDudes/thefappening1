@@ -1,0 +1,36 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+Sneaker Head
+{% endblock %}
+
+{% block body %}
+{{ error }}
+
+{% if post %}
+<h3 style="text-align: center;">Search Result Found</h3>
+<br>
+<div class="container">
+{% for i in post %}
+<div class="card mb-4" style="max-width: 410px;" id="card-listings">
+    <div class="row no-gutters">
+      <div class="col-md-10">
+        <a href="{% url 'listingpage' i.id %}"><img src="{{i.link}}" class="card-img" alt="..." style="width: 100%; height: auto; padding-left: 80px;"></a>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{i.title}}</h5>
+          <a href="{% url 'category' i.category %}"><h7>{{i.category}}</h7></a> • <a href="{% url 'categorys' i.categorys %}"><h7>{{i.categorys}}</h7></a> • <a href="{% url 'categoryss' i.categoryss %}"><h7>{{i.categoryss}}</h7></a>
+          <br><a href="{% url 'listingpage' i.id %}"><button class="btn btn-outline-success">Watch Now</button></a>
+          <p class="card-text"><small class="text-muted">{{i.time}}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+  {% else %}
+   <h3 style="text-align: center;">Nothing Found!</h3>
+   <a href="{% url 'index' %}">Go Back</a>
+   {% endif %}
+
+{% endblock %}
